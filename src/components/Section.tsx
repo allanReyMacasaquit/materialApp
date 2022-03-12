@@ -1,37 +1,46 @@
 import React from 'react'
+import { Fade } from 'react-awesome-reveal'
 import styled from 'styled-components'
 import { keyframes } from 'styled-components'
 
 interface Props {
   title?: string,
   desc?: string,
-  bgImage: string,
+  model: string,
   leftButton?: string,
-  rightButton?: string
+  rightButton?: string,
+  arrowBottom?: string 
 
 }
 
-function Section({title, desc, bgImage, leftButton, rightButton}: Props) {
+function Section({title, desc, model, leftButton, rightButton, arrowBottom}: Props) {
     
   return (
-    <Container brand={bgImage}>
+    <Container brand={model}>
+      <Fade direction='up'>
         <ItemText>
             <h1>{title}</h1>
             <p>{desc}</p>
         </ItemText> 
+      </Fade>
         <Button>
+          <Fade direction='up'>
             <ButtonGroup>
                 <LeftButton>
                 {leftButton}
                 </LeftButton>
+                {rightButton &&
                 <RightButton>
                    {rightButton}
-                </RightButton>
+                </RightButton>}
             </ButtonGroup>
+          </Fade>
             <DownArrow>
-                <img style={{height: '40px'}} src='/images/down-arrow.svg' alt='arrow'/>
+                <img style={{height: '40px'}} src={arrowBottom} alt='arrow'/>
             </DownArrow>
         </Button>
+      
+        
     </Container>
   )
 }
@@ -44,7 +53,7 @@ const Container = styled.div<{brand: string}>`
     background-size: cover;
     background-position: center;
     background-epeat: no-repeat;
-    background-image: ${props => `url('/images/model-${props.brand}.jpg')`};
+    background-image: ${props => `url('/images/${props.brand}')`};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
